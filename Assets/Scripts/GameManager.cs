@@ -9,16 +9,20 @@ public class GameManager : MonoBehaviour
 
     [Header("Game Settings")]
     public float totalDaySeconds = 180f; // 3 mins
-    public float customerDuration = 15f;
 
-    [Header("Game State")]
-    public float remainingDayTime;
-    public int totalTips = 0;
-    public bool isDayActive = false;
+    [Header("Spawning")]
+    public GameObject[] customerPrefabs;
+    public Transform customerSpawnPoint;
+    public CustomerController currentCustomer;
 
+    [Header("Events")]
     public UnityEvent<int> onTipsChanged;
     public UnityEvent<float> onDayTimeRemainingChanged;
     public UnityEvent onDayEnded;
+
+    private float remainingDayTime;
+    private int totalTips;
+    private bool isDayActive;
 
     private void Awake()
     {
@@ -64,8 +68,39 @@ public class GameManager : MonoBehaviour
     {
         if (!isDayActive) return;
         
+        // Destroy existing customer if any
+        if (currentCustomer != null)
+        {
+            Destroy(currentCustomer.gameObject);
+        }
+
+        if (customerPrefabs == null || customerPrefabs.Length == 0)
+        {
+            Debug.LogWarning("No customer prefabs assigned!");
+            return;
+        }
+
         Debug.Log("Next customer arriving...");
-        // Logic to spawn/activate a customer would go here
+        
+        // Spawn random prefab
+        int randomIndex = Random.Range(0, customerPrefabs.Length);
+        GameObject prefab = customerPrefabs[randomIndex];
+        GameObject instance = Instantiate(prefab, customerSpawnPoint != null ? customerSpawnPoint.position : Vector3.zero, Quaternion.identity);
+        
+        currentCustomer = instance.GetComponent<CustomerController>();
+        
+        if (currentCustomer != null)
+        {
+            // Connect UI events
+            UIManager ui = FindFirstObjectByType<UIManager>();
+            if (ui != null)
+            {
+                currentCustomer.onEmotionsChanged.AddListener(ui.UpdateCustomerEmotions);
+                currentCustomer.onTimerChanged.AddListener(ui.UpdateCustomerTimer);
+            }
+
+            currentCustomer.InitializeCustomer();
+        }
     }
 
     private void EndDay()
@@ -74,6 +109,11 @@ public class GameManager : MonoBehaviour
         remainingDayTime = 0;
         onDayEnded?.Invoke();
         Debug.Log("Day ended! Total Tips: " + totalTips);
+
+        if (currentCustomer != null)
+        {
+            currentCustomer.gameObject.SetActive(false);
+        }
     }
 
     public void OnCustomerFinished(int tipsEarned)
@@ -81,6 +121,7 @@ public class GameManager : MonoBehaviour
         AddTips(tipsEarned);
         if (isDayActive)
         {
+            // Small delay before next customer could be added here if needed
             StartNextCustomer();
         }
     }
