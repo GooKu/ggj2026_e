@@ -25,6 +25,13 @@ public class GameManager : MonoBehaviour
     private int totalTips;
     private bool isDayActive;
 
+    [Header("Statistics")]
+    private int totalCustomers;
+    private int perfectServicesCount;
+
+    [Header("UI Reference")]
+    public DailyResultUI dailyResultUI;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -46,6 +53,8 @@ public class GameManager : MonoBehaviour
     {
         remainingDayTime = totalDaySeconds;
         totalTips = 0;
+        totalCustomers = 0;
+        perfectServicesCount = 0;
         isDayActive = true;
         onTipsChanged?.Invoke(totalTips);
         
@@ -120,16 +129,24 @@ public class GameManager : MonoBehaviour
 
         if (CurrentCustomer != null)
         {
-            CurrentCustomer.gameObject.SetActive(false);
+            CurrentCustomer.FinishCustomer();
+        }
+
+        if (dailyResultUI != null)
+        {
+            dailyResultUI.gameObject.SetActive(true);
+            dailyResultUI.Setup(totalTips, perfectServicesCount, totalCustomers);
         }
     }
 
-    public void OnCustomerFinished(int tipsEarned)
+    public void OnCustomerFinished(int tipsEarned, bool isPerfect)
     {
+        totalCustomers++;
+        if (isPerfect) perfectServicesCount++;
+        
         AddTips(tipsEarned);
         if (isDayActive)
         {
-            // Small delay before next customer could be added here if needed
             StartNextCustomer();
         }
     }
