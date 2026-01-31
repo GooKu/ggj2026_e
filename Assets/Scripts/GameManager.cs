@@ -31,6 +31,9 @@ public class GameManager : MonoBehaviour
 
     [Header("UI Reference")]
     public DailyResultUI dailyResultUI;
+    public CustomerResultUI customerResultUI;
+
+    private bool isPaused = false;
 
     private void Awake()
     {
@@ -56,6 +59,7 @@ public class GameManager : MonoBehaviour
         totalCustomers = 0;
         perfectServicesCount = 0;
         isDayActive = true;
+        isPaused = false;
         onTipsChanged?.Invoke(totalTips);
         
         StartNextCustomer();
@@ -63,7 +67,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (!isDayActive) return;
+        if (!isDayActive || isPaused) return;
 
         remainingDayTime -= Time.deltaTime;
         onDayTimeRemainingChanged?.Invoke(remainingDayTime);
@@ -145,6 +149,30 @@ public class GameManager : MonoBehaviour
         if (isPerfect) perfectServicesCount++;
         
         AddTips(tipsEarned);
+        
+        if (isDayActive && customerResultUI != null)
+        {
+            StartCoroutine(ShowResultAndContinue(tipsEarned, isPerfect));
+        }
+        else if (isDayActive)
+        {
+            StartNextCustomer();
+        }
+    }
+
+    private IEnumerator ShowResultAndContinue(int tips, bool isPerfect)
+    {
+        isPaused = true;
+        
+        if (customerResultUI != null)
+        {
+            customerResultUI.ShowResult(tips, isPerfect);
+            // Wait for the UI duration (plus a little buffer if needed)
+            yield return new WaitForSecondsRealtime(customerResultUI.displayDuration);
+        }
+
+        isPaused = false;
+        
         if (isDayActive)
         {
             StartNextCustomer();
