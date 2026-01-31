@@ -66,9 +66,10 @@ public class CustomerController : MonoBehaviour
         {
             SpawnNextAcupoint();
             nextSpawnTime = elapsedCustomerTime + spawnInterval;
-        if (remainingTime <= 0)
-        {
-            FinishCustomer();
+            if (remainingTime <= 0)
+            {
+                FinishCustomer();
+            }
         }
     }
 
