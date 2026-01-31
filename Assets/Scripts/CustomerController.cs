@@ -132,7 +132,7 @@ public class CustomerController : MonoBehaviour
         }
     }
 
-    private void FinishCustomer()
+    public void FinishCustomer()
     {
         if (!isActive) return;
         isActive = false;
@@ -147,9 +147,11 @@ public class CustomerController : MonoBehaviour
         int baseTip = 10;
         float remainingTime = customerTimer - elapsedCustomerTime;
         int timeBonus = Mathf.FloorToInt(Mathf.Max(0, remainingTime) * 2f);
-        int finalTip = (currentAnger <= 0 && currentMelancholy <= 0) ? (baseTip + timeBonus) : 0;
+        
+        bool isPerfect = currentAnger <= 0 && currentMelancholy <= 0;
+        int finalTip = isPerfect ? (baseTip + timeBonus) : 0;
 
-        GameManager.Instance.OnCustomerFinished(finalTip);
+        GameManager.Instance.OnCustomerFinished(finalTip, isPerfect);
         
         gameObject.SetActive(false);
     }
