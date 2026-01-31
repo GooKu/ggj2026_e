@@ -134,11 +134,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f7c314405ee4cb4eb2c77d5b1ac29ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Acupoint
-  type: 0
-  reductionAmount: 10
+  minAngerImpact: 5
+  maxAngerImpact: 15
+  minMelancholyImpact: 0
+  maxMelancholyImpact: 0
+  perfectTipAmount: 1
   spawnTime: 1
   lifetime: 2
   approachCircle: {fileID: 824048244809652976}
+  perfectImg: {fileID: 7405178369536356482, guid: 333f75be7aa8fc341a93c8c256bccc2d, type: 3}
+  goodImg: {fileID: 7405178369536356482, guid: c13e5d00fc562bb41b5954d39312abbf, type: 3}
+  badImage: {fileID: 7405178369536356482, guid: 7c98e6624e421ec49b6bb5ed5106dab2, type: 3}
 --- !u!1 &3507912558806929388
 GameObject:
   m_ObjectHideFlags: 0
