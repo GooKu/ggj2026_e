@@ -7,7 +7,11 @@ using UnityEngine.UI;
 public class Acupoint : MonoBehaviour
 {
     public CustomerController.EmotionType type;
-    public float reductionAmount = 10f;
+    [Header("Emotion Impact Range (Positive = Reduce, Negative = Increase)")]
+    public int minAngerImpact = 5;
+    public int maxAngerImpact = 15;
+    public int minMelancholyImpact = 0;
+    public int maxMelancholyImpact = 0;
     public int perfectTipAmount = 1;
     
     [Header("Timing Mechanics")]
@@ -70,9 +74,11 @@ public class Acupoint : MonoBehaviour
         if (hasTriggered) return;
         
         // 計算精準度 (可選)
-        float accuracy = 1f - Mathf.Abs((elapsedSinceActive / lifetime) - 0.9f);
+        float angerImpact = Random.Range(minAngerImpact, maxAngerImpact + 1) * accuracy;
+        float melancholyImpact = Random.Range(minMelancholyImpact, maxMelancholyImpact + 1) * accuracy;
 
-        master.ReduceEmotion(type, reductionAmount * accuracy);
+        if (Mathf.Abs(angerImpact) > 0.01f) master.ApplyEmotionImpact(CustomerController.EmotionType.Anger, angerImpact);
+        if (Mathf.Abs(melancholyImpact) > 0.01f) master.ApplyEmotionImpact(CustomerController.EmotionType.Melancholy, melancholyImpact);
         
         if (accuracy > 0.9f)
         {
@@ -80,14 +86,7 @@ public class Acupoint : MonoBehaviour
             Debug.Log($"Perfect! Immediate tip: {perfectTipAmount}");
         }
         
-        if (type == CustomerController.EmotionType.Anger)
-        {
-            Debug.Log("減少憤怒情緒值" + reductionAmount * accuracy + "點!");
-        }
-        else
-        {
-            Debug.Log("減少憂鬱情緒值" + reductionAmount * accuracy + "點!");
-        }
+        Debug.Log($"穴位點擊 - 憤怒影響: {angerImpact:F1}, 憂鬱影響: {melancholyImpact:F1} (精準度: {accuracy:F2})");
             
         DeactivateAcupoint();
     }

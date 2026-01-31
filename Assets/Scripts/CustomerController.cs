@@ -111,12 +111,12 @@ public class CustomerController : MonoBehaviour
         }
     }
 
-    public void ReduceEmotion(EmotionType type, float amount)
+    public void ApplyEmotionImpact(EmotionType type, float amount)
     {
         if (type == EmotionType.Anger)
-            currentAnger = Mathf.Max(0, currentAnger - amount);
+            currentAnger = Mathf.Clamp(currentAnger - amount, 0, maxAnger);
         else
-            currentMelancholy = Mathf.Max(0, currentMelancholy - amount);
+            currentMelancholy = Mathf.Clamp(currentMelancholy - amount, 0, maxMelancholy);
 
         onEmotionsChanged?.Invoke(currentAnger / maxAnger, currentMelancholy / maxMelancholy);
 
