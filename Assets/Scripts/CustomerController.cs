@@ -20,6 +20,11 @@ public class CustomerController : MonoBehaviour
     public UnityEvent<float, float> onEmotionsChanged; // (Anger, Melancholy)
     public UnityEvent<float> onTimerChanged;
 
+    [Header("Visuals")]
+    public Sprite angryFace;
+    public Sprite melancholyFace;
+    public Sprite happyFace;
+
     [Header("Spawning Config")]
     public float spawnInterval = 2.0f; // 穴道生成間隔
     private float nextSpawnTime;

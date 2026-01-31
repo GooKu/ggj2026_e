@@ -54,8 +54,21 @@ public class UIManager : MonoBehaviour
     {
         if (faceTimeImage == null) return;
 
-        if (a <= 0 && m <= 0) faceTimeImage.sprite = happyFace;
-        else if (a > m) faceTimeImage.sprite = angryFace;
-        else faceTimeImage.sprite = sadFace;
+        // Try to get sprites from current customer
+        Sprite currentAngry = angryFace;
+        Sprite currentSad = sadFace;
+        Sprite currentHappy = happyFace;
+
+        if (GameManager.Instance != null && GameManager.Instance.currentCustomer != null)
+        {
+            var customer = GameManager.Instance.currentCustomer;
+            if (customer.angryFace != null) currentAngry = customer.angryFace;
+            if (customer.melancholyFace != null) currentSad = customer.melancholyFace;
+            if (customer.happyFace != null) currentHappy = customer.happyFace;
+        }
+
+        if (a <= 0 && m <= 0) faceTimeImage.sprite = currentHappy;
+        else if (a > m) faceTimeImage.sprite = currentAngry;
+        else faceTimeImage.sprite = currentSad;
     }
 }
