@@ -31,6 +31,9 @@ public class GameManager : MonoBehaviour
 
     [Header("UI Reference")]
     public DailyResultUI dailyResultUI;
+    public CustomerResultUI customerResultUI;
+
+    private bool isPaused = false;
 
     private void Awake()
     {
@@ -56,6 +59,7 @@ public class GameManager : MonoBehaviour
         totalCustomers = 0;
         perfectServicesCount = 0;
         isDayActive = true;
+        isPaused = false;
         onTipsChanged?.Invoke(totalTips);
         
         StartNextCustomer();
@@ -63,7 +67,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (!isDayActive) return;
+        if (!isDayActive || isPaused) return;
 
         remainingDayTime -= Time.deltaTime;
         onDayTimeRemainingChanged?.Invoke(remainingDayTime);
@@ -127,15 +131,13 @@ public class GameManager : MonoBehaviour
         onDayEnded?.Invoke();
         Debug.Log("Day ended! Total Tips: " + totalTips);
 
-        if (CurrentCustomer != null)
+        if (CurrentCustomer != null && CurrentCustomer.gameObject.activeInHierarchy)
         {
             CurrentCustomer.FinishCustomer();
         }
-
-        if (dailyResultUI != null)
+        else
         {
-            dailyResultUI.gameObject.SetActive(true);
-            dailyResultUI.Setup(totalTips, perfectServicesCount, totalCustomers);
+            ShowDailyResult();
         }
     }
 
@@ -145,9 +147,54 @@ public class GameManager : MonoBehaviour
         if (isPerfect) perfectServicesCount++;
         
         AddTips(tipsEarned);
+        
+        if (customerResultUI != null)
+        {
+            StartCoroutine(ShowResultAndContinue(tipsEarned, isPerfect));
+        }
+        else
+        {
+            Debug.LogWarning("CustomerResultUI is not assigned! Skipping settlement pause.");
+            HandleAfterSettlement();
+        }
+    }
+
+    private IEnumerator ShowResultAndContinue(int tips, bool isPerfect)
+    {
+        isPaused = true;
+        
+        if (customerResultUI != null)
+        {
+            customerResultUI.ShowResult(tips, isPerfect);
+            yield return new WaitForSecondsRealtime(customerResultUI.displayDuration);
+        }
+
+        isPaused = false;
+        HandleAfterSettlement();
+    }
+
+    private void HandleAfterSettlement()
+    {
         if (isDayActive)
         {
             StartNextCustomer();
+        }
+        else
+        {
+            ShowDailyResult();
+        }
+    }
+
+    private void ShowDailyResult()
+    {
+        if (dailyResultUI != null)
+        {
+            dailyResultUI.gameObject.SetActive(true);
+            dailyResultUI.Setup(totalTips, perfectServicesCount, totalCustomers);
+        }
+        else
+        {
+            Debug.LogWarning("DailyResultUI is not assigned!");
         }
     }
 }
