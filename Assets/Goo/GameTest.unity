@@ -429,7 +429,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2024986531571086310, guid: f259fa80d351f774caf78555c56b577a, type: 3}
       propertyPath: customerPrefabs.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2024986531571086310, guid: f259fa80d351f774caf78555c56b577a, type: 3}
       propertyPath: 'customerPrefabs.Array.data[0]'
@@ -442,7 +442,7 @@ PrefabInstance:
     - target: {fileID: 2024986531571086310, guid: f259fa80d351f774caf78555c56b577a, type: 3}
       propertyPath: 'customerPrefabs.Array.data[2]'
       value: 
-      objectReference: {fileID: 3203320805314674398, guid: e56030608dbd6114ebf56b8658abdf2b, type: 3}
+      objectReference: {fileID: 3203320805314674398, guid: 3641dd4d801329545ae536af84d930d5, type: 3}
     - target: {fileID: 2363814093681306579, guid: f259fa80d351f774caf78555c56b577a, type: 3}
       propertyPath: m_Name
       value: GameMange

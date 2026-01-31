@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: aea8b4f119c79fb46bf913de90de20f2
+guid: 874cbe3d0bc2c1546b5750113953e2e5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7284239835086387551
-    second: "\u4EBA\u6539\u8272_0"
+      213: -1153227727119959621
+    second: Robot_SK_1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: "\u4EBA\u6539\u8272_0"
+      name: Robot_SK_1_0
       rect:
         serializedVersion: 2
-        x: 52
-        y: 29
-        width: 153
-        height: 142
+        x: 12
+        y: 4
+        width: 39
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f59f2155981d61560800000000000000
-      internalID: 7284239835086387551
+      spriteID: bb932e30e79eeffe0800000000000000
+      internalID: -1153227727119959621
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      "\u4EBA\u6539\u8272_0": 7284239835086387551
+      Robot_SK_1_0: -1153227727119959621
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
