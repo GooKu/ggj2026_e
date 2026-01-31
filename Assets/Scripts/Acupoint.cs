@@ -72,8 +72,9 @@ public class Acupoint : MonoBehaviour
     private void OnAcupointClicked()
     {
         if (hasTriggered) return;
-        
-        // 計算精準度 (可選)
+
+        // 計算精準度
+        float accuracy = 1f - Mathf.Abs((elapsedSinceActive / lifetime) - 0.9f);
         float angerImpact = Random.Range(minAngerImpact, maxAngerImpact + 1) * accuracy;
         float melancholyImpact = Random.Range(minMelancholyImpact, maxMelancholyImpact + 1) * accuracy;
 
