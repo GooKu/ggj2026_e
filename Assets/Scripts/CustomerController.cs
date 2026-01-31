@@ -126,13 +126,20 @@ public class CustomerController : MonoBehaviour
 
         onEmotionsChanged?.Invoke(currentAnger / maxAnger, currentMelancholy / maxMelancholy);
 
+        // 如果 A 或 M 達到上限，立即結束並扣 20 元
+        if (currentAnger >= maxAnger || currentMelancholy >= maxMelancholy)
+        {
+            FinishCustomer(true);
+            return;
+        }
+
         if (currentAnger <= 0 && currentMelancholy <= 0)
         {
-            FinishCustomer();
+            FinishCustomer(false);
         }
     }
 
-    public void FinishCustomer()
+    public void FinishCustomer(bool isMaxPenalty = false)
     {
         if (!isActive) return;
         isActive = false;
@@ -143,16 +150,28 @@ public class CustomerController : MonoBehaviour
             if (acupoint != null) acupoint.DeactivateAcupoint();
         }
 
-        // 計算小費
-        int baseTip = 10;
-        float remainingTime = customerTimer - elapsedCustomerTime;
-        int timeBonus = Mathf.FloorToInt(Mathf.Max(0, remainingTime) * 2f);
-        
-        bool isPerfect = currentAnger <= 0 && currentMelancholy <= 0;
-        int finalTip = isPerfect ? (baseTip + timeBonus) : 0;
+        int finalTip = 0;
+        bool isPerfect = false;
+
+        if (isMaxPenalty)
+        {
+            finalTip = -20;
+            isPerfect = false;
+            Debug.Log("Customer reached max A/M! Penalty: -20");
+        }
+        else
+        {
+            // 計算小費
+            int baseTip = 10;
+            float remainingTime = customerTimer - elapsedCustomerTime;
+            int timeBonus = Mathf.FloorToInt(Mathf.Max(0, remainingTime) * 2f);
+            
+            isPerfect = currentAnger <= 0 && currentMelancholy <= 0;
+            finalTip = isPerfect ? (baseTip + timeBonus) : 0;
+        }
 
         GameManager.Instance.OnCustomerFinished(finalTip, isPerfect);
-        
+        StopAllCoroutines();
         gameObject.SetActive(false);
     }
 
