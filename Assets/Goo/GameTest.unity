@@ -396,10 +396,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneUI
       objectReference: {fileID: 0}
-    - target: {fileID: 1008807034433381022, guid: b8c4208edcc85c54caf35f4817d8d0c5, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -644,6 +640,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2024986531571086310, guid: f259fa80d351f774caf78555c56b577a, type: 3}
       propertyPath: 'customerPrefabs.Array.data[0]'
+      value: 
+      objectReference: {fileID: 3203320805314674398, guid: e56030608dbd6114ebf56b8658abdf2b, type: 3}
+    - target: {fileID: 2024986531571086310, guid: f259fa80d351f774caf78555c56b577a, type: 3}
+      propertyPath: 'customerPrefabs.Array.data[1]'
       value: 
       objectReference: {fileID: 3203320805314674398, guid: 27bfe59a8da5b3c40938d5ee18380dad, type: 3}
     - target: {fileID: 2363814093681306579, guid: f259fa80d351f774caf78555c56b577a, type: 3}
