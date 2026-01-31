@@ -131,15 +131,13 @@ public class GameManager : MonoBehaviour
         onDayEnded?.Invoke();
         Debug.Log("Day ended! Total Tips: " + totalTips);
 
-        if (CurrentCustomer != null)
+        if (CurrentCustomer != null && CurrentCustomer.gameObject.activeInHierarchy)
         {
             CurrentCustomer.FinishCustomer();
         }
-
-        if (dailyResultUI != null)
+        else
         {
-            dailyResultUI.gameObject.SetActive(true);
-            dailyResultUI.Setup(totalTips, perfectServicesCount, totalCustomers);
+            ShowDailyResult();
         }
     }
 
@@ -150,13 +148,14 @@ public class GameManager : MonoBehaviour
         
         AddTips(tipsEarned);
         
-        if (isDayActive && customerResultUI != null)
+        if (customerResultUI != null)
         {
             StartCoroutine(ShowResultAndContinue(tipsEarned, isPerfect));
         }
-        else if (isDayActive)
+        else
         {
-            StartNextCustomer();
+            Debug.LogWarning("CustomerResultUI is not assigned! Skipping settlement pause.");
+            HandleAfterSettlement();
         }
     }
 
@@ -167,15 +166,35 @@ public class GameManager : MonoBehaviour
         if (customerResultUI != null)
         {
             customerResultUI.ShowResult(tips, isPerfect);
-            // Wait for the UI duration (plus a little buffer if needed)
             yield return new WaitForSecondsRealtime(customerResultUI.displayDuration);
         }
 
         isPaused = false;
-        
+        HandleAfterSettlement();
+    }
+
+    private void HandleAfterSettlement()
+    {
         if (isDayActive)
         {
             StartNextCustomer();
+        }
+        else
+        {
+            ShowDailyResult();
+        }
+    }
+
+    private void ShowDailyResult()
+    {
+        if (dailyResultUI != null)
+        {
+            dailyResultUI.gameObject.SetActive(true);
+            dailyResultUI.Setup(totalTips, perfectServicesCount, totalCustomers);
+        }
+        else
+        {
+            Debug.LogWarning("DailyResultUI is not assigned!");
         }
     }
 }
