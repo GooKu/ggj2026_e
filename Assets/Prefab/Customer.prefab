@@ -95,16 +95,19 @@ MonoBehaviour:
   currentAnger: 0
   currentMelancholy: 0
   customerTimer: 15
-  acupoints: []
   onEmotionsChanged:
     m_PersistentCalls:
       m_Calls: []
   onTimerChanged:
     m_PersistentCalls:
       m_Calls: []
+  normalFace: {fileID: 0}
   angryFace: {fileID: 0}
   melancholyFace: {fileID: 0}
   happyFace: {fileID: 0}
+  onFaceChanged:
+    m_PersistentCalls:
+      m_Calls: []
   spawnInterval: 2
 --- !u!1001 &4305523810503712047
 PrefabInstance:
