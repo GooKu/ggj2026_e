@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4374596899458224706}
   - component: {fileID: 2024986531571086310}
-  - component: {fileID: 1774341674315092617}
   m_Layer: 0
   m_Name: GameMange
   m_TagString: Untagged
@@ -58,24 +57,3 @@ MonoBehaviour:
   onDayEnded:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1774341674315092617
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2363814093681306579}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c6bf3f46466eb248a385146b6db18e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UIManager
-  totalTipsText: {fileID: 0}
-  dayTimerText: {fileID: 0}
-  angerSlider: {fileID: 0}
-  melancholySlider: {fileID: 0}
-  customerTimerText: {fileID: 0}
-  faceTimeImage: {fileID: 0}
-  angryFace: {fileID: 0}
-  sadFace: {fileID: 0}
-  happyFace: {fileID: 0}

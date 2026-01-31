@@ -7,19 +7,14 @@ using TMPro;
 public class UIManager : MonoBehaviour
 {
     [Header("Day HUD")]
-    public TextMeshProUGUI totalTipsText;
-    public TextMeshProUGUI dayTimerText;
+    public Text totalTipsText;
+    public Image dayTimerFillImage;
 
     [Header("Customer UI")]
-    public Slider angerSlider;
-    public Slider melancholySlider;
-    public TextMeshProUGUI customerTimerText;
+    public Image angerImage;
+    public Image melancholyImage;
+    public Text customerTimerText;
     public Image faceTimeImage; 
-
-    [Header("Sprites")]
-    public Sprite angryFace;
-    public Sprite sadFace;
-    public Sprite happyFace;
 
     private void Start()
     {
@@ -34,13 +29,17 @@ public class UIManager : MonoBehaviour
 
     public void UpdateDayTimer(float time)
     {
-        if (dayTimerText != null) dayTimerText.text = string.Format("{0:00}:{1:00}", (int)time / 60, (int)time % 60);
+        if (dayTimerFillImage != null && GameManager.Instance != null)
+        {
+            float progress = 1f - (time / GameManager.Instance.totalDaySeconds);
+            dayTimerFillImage.fillAmount = Mathf.Clamp01(progress);
+        }
     }
 
     public void UpdateCustomerEmotions(float angerNormalized, float melancholyNormalized)
     {
-        if (angerSlider != null) angerSlider.value = angerNormalized;
-        if (melancholySlider != null) melancholySlider.value = melancholyNormalized;
+        if (angerImage != null) angerImage.fillAmount = angerNormalized;
+        if (melancholyImage != null) melancholyImage.fillAmount = melancholyNormalized;
 
         UpdateFace(angerNormalized, melancholyNormalized);
     }
@@ -53,22 +52,10 @@ public class UIManager : MonoBehaviour
     private void UpdateFace(float a, float m)
     {
         if (faceTimeImage == null) return;
+        var customer = GameManager.Instance.currentCustomer;
 
-        // Try to get sprites from current customer
-        Sprite currentAngry = angryFace;
-        Sprite currentSad = sadFace;
-        Sprite currentHappy = happyFace;
-
-        if (GameManager.Instance != null && GameManager.Instance.currentCustomer != null)
-        {
-            var customer = GameManager.Instance.currentCustomer;
-            if (customer.angryFace != null) currentAngry = customer.angryFace;
-            if (customer.melancholyFace != null) currentSad = customer.melancholyFace;
-            if (customer.happyFace != null) currentHappy = customer.happyFace;
-        }
-
-        if (a <= 0 && m <= 0) faceTimeImage.sprite = currentHappy;
-        else if (a > m) faceTimeImage.sprite = currentAngry;
-        else faceTimeImage.sprite = currentSad;
+        if (a <= 0 && m <= 0) faceTimeImage.sprite = customer.happyFace;
+        else if (a > m) faceTimeImage.sprite = customer.angryFace;
+        else faceTimeImage.sprite = customer.melancholyFace;
     }
 }
