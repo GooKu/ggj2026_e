@@ -33,6 +33,12 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        UIManager ui = FindFirstObjectByType<UIManager>();
+        if (ui != null)
+        {
+            onTipsChanged.AddListener(ui.UpdateTips);
+            onDayTimeRemainingChanged.AddListener(ui.UpdateDayTimer);
+        }
         StartGame();
     }
 
