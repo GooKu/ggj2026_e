@@ -27,7 +27,6 @@ public class CustomerController : MonoBehaviour
 
     private bool isActive = false;
     private float elapsedCustomerTime = 0f;
-    private List<Acupoint> pendingAcupoints = new List<Acupoint>();
 
     public void InitializeCustomer()
     {
@@ -61,15 +60,17 @@ public class CustomerController : MonoBehaviour
         float remainingTime = customerTimer - elapsedCustomerTime;
         onTimerChanged?.Invoke(remainingTime);
 
+        if (remainingTime <= 0)
+        {
+            FinishCustomer();
+            return;
+        }
+
         // 每隔一段時間生成一個穴道
         if (elapsedCustomerTime >= nextSpawnTime)
         {
             SpawnNextAcupoint();
             nextSpawnTime = elapsedCustomerTime + spawnInterval;
-            if (remainingTime <= 0)
-            {
-                FinishCustomer();
-            }
         }
     }
 
