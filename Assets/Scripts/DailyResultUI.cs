@@ -7,7 +7,6 @@ public class DailyResultUI : MonoBehaviour
     [Header("UI Elements")]
     public Text tipsText;
     public Text perfectServicesText;
-    public Text totalCustomersText;
     public Text reviewText;
 
     [Header("Review Pool")]
@@ -27,13 +26,12 @@ public class DailyResultUI : MonoBehaviour
     {
         if (tipsText != null) tipsText.text = $"小費: ${tips}";
         if (perfectServicesText != null) perfectServicesText.text = $"完美服務: {perfectCount}/{totalCount}";
-        if (totalCustomersText != null) totalCustomersText.text = $"總客人: {totalCount}";
 
         if (reviewText != null)
         {
             float ratio = totalCount > 0 ? (float)perfectCount / totalCount : 0;
             string[] pool = ratio >= 0.8f ? perfectReviews : normalReviews;
-            reviewText.text = $"客人評語: {pool[Random.Range(0, pool.Length)]}";
+            reviewText.text = $"{pool[Random.Range(0, pool.Length)]}";
         }
     }
 
