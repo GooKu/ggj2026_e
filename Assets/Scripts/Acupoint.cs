@@ -9,9 +9,9 @@ public class Acupoint : MonoBehaviour
     public int minMelancholyImpact = 0;
     public int maxMelancholyImpact = 0;
     public int perfectTipAmount = 1;
+    public float perfectTimePercent = 0.8f;
     
     [Header("Timing Mechanics")]
-    public float spawnTime = 1f; // 該穴位在客人出現後幾秒出現
     public float lifetime = 2f;  // 出現後存在的時間
     public RectTransform approachCircle;
     
@@ -51,7 +51,8 @@ public class Acupoint : MonoBehaviour
         // 縮放圈圈邏輯 (視覺提示)
         if (approachCircle != null)
         {
-            float scale = Mathf.Lerp(3f, 0.88f, elapsedSinceActive / lifetime);
+            float percentTime = 1 - perfectTimePercent;
+            float scale = Mathf.Lerp(3f, 1 - 2 * percentTime, elapsedSinceActive / lifetime);
             approachCircle.localScale = new Vector3(scale, scale, 1);
         }
 
@@ -67,7 +68,7 @@ public class Acupoint : MonoBehaviour
         if (hasTriggered) return;
 
         // 計算精準度
-        float accuracy = 1f - Mathf.Abs((elapsedSinceActive / lifetime) - 0.9f);
+        float accuracy = 1f - Mathf.Abs((elapsedSinceActive / lifetime) - perfectTimePercent);
         float angerImpact = Random.Range(minAngerImpact, maxAngerImpact + 1) * accuracy;
         float melancholyImpact = Random.Range(minMelancholyImpact, maxMelancholyImpact + 1) * accuracy;
 

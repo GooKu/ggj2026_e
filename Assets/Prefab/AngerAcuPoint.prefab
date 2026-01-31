@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 824048244809652976, guid: 2ad15311390707e4d9b6473d86bc626b, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2203764244564980739, guid: 2ad15311390707e4d9b6473d86bc626b, type: 3}
       propertyPath: m_Name
       value: AngerAcuPoint
@@ -46,11 +50,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8204602610108296793, guid: 2ad15311390707e4d9b6473d86bc626b, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8204602610108296793, guid: 2ad15311390707e4d9b6473d86bc626b, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 50
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 8204602610108296793, guid: 2ad15311390707e4d9b6473d86bc626b, type: 3}
       propertyPath: m_LocalPosition.x
