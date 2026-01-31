@@ -59,6 +59,8 @@ public class Acupoint : MonoBehaviour
         if (elapsedSinceActive >= lifetime)
         {
             // 時間到，未點擊即隱藏
+            master.RegisterMiss();
+            if (badImage != null) Instantiate(badImage, transform.position, Quaternion.identity, transform.parent);
             DeactivateAcupoint();
         }
     }
@@ -75,6 +77,7 @@ public class Acupoint : MonoBehaviour
         if (Mathf.Abs(angerImpact) > 0.01f) master.ApplyEmotionImpact(CustomerController.EmotionType.Anger, angerImpact);
         if (Mathf.Abs(melancholyImpact) > 0.01f) master.ApplyEmotionImpact(CustomerController.EmotionType.Melancholy, melancholyImpact);
         
+        master.RegisterHit();
         master.ShowReaction(angerImpact, melancholyImpact);
 
         if (accuracy > 0.9f)

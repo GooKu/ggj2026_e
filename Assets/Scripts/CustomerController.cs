@@ -43,12 +43,14 @@ public class CustomerController : MonoBehaviour
 
     private bool isActive = false;
     private float elapsedCustomerTime = 0f;
+    private int consecutiveMisses = 0;
 
     public void InitializeCustomer()
     {
         currentAnger = startAnger;
         currentMelancholy = startMelancholy;
         elapsedCustomerTime = 0f;
+        consecutiveMisses = 0;
         isActive = true;
         
         onEmotionsChanged?.Invoke(currentAnger / maxAnger, currentMelancholy / maxMelancholy);
@@ -136,6 +138,27 @@ public class CustomerController : MonoBehaviour
         if (currentAnger <= 0 && currentMelancholy <= 0)
         {
             FinishCustomer(false);
+        }
+    }
+
+    public void RegisterHit()
+    {
+        consecutiveMisses = 0;
+    }
+
+    public void RegisterMiss()
+    {
+        consecutiveMisses++;
+        if (consecutiveMisses > GameManager.Instance.missThreshold)
+        {
+            float penalty = GameManager.Instance.missPenalty;
+            // 負面條上升 y (對這款遊戲來說增加 A/M 是負面的，所以 ApplyEmotionImpact 傳入負值)
+            // ApplyEmotionImpact(type, amount) 內部是 Clamp(current - amount)
+            // 所以要上升的話要減去負值，或者直接修改 ApplyEmotionImpact
+            // 這裡直接呼叫 ApplyEmotionImpact 傳入 -penalty 即可增加數值
+            ApplyEmotionImpact(EmotionType.Anger, -penalty);
+            ApplyEmotionImpact(EmotionType.Melancholy, -penalty);
+            Debug.Log($"Consecutive misses: {consecutiveMisses}. Penalty applied: +{penalty} A/M");
         }
     }
 
