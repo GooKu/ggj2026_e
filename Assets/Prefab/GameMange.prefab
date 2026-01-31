@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   totalDaySeconds: 180
   customerPrefabs:
-  - {fileID: 3203320805314674398, guid: 27bfe59a8da5b3c40938d5ee18380dad, type: 3}
+  - {fileID: 3203320805314674398, guid: e56030608dbd6114ebf56b8658abdf2b, type: 3}
   customerSpawnPoint: {fileID: 1199643637595058364}
   onTipsChanged:
     m_PersistentCalls:
