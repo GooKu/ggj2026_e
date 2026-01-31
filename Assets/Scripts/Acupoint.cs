@@ -81,6 +81,8 @@ public class Acupoint : MonoBehaviour
         if (Mathf.Abs(angerImpact) > 0.01f) master.ApplyEmotionImpact(CustomerController.EmotionType.Anger, angerImpact);
         if (Mathf.Abs(melancholyImpact) > 0.01f) master.ApplyEmotionImpact(CustomerController.EmotionType.Melancholy, melancholyImpact);
         
+        master.ShowReaction(angerImpact, melancholyImpact);
+
         if (accuracy > 0.9f)
         {
             GameManager.Instance.AddTips(perfectTipAmount);

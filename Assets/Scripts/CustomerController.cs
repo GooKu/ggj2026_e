@@ -27,9 +27,12 @@ public class CustomerController : MonoBehaviour
     public UnityEvent<float> onTimerChanged;
 
     [Header("Visuals")]
+    public Sprite normalFace;
     public Sprite angryFace;
     public Sprite melancholyFace;
     public Sprite happyFace;
+
+    public UnityEvent<Sprite> onFaceChanged;
 
     [Header("Spawning Config")]
     public float spawnInterval = 2.0f; // 穴道生成間隔
@@ -47,6 +50,7 @@ public class CustomerController : MonoBehaviour
         isActive = true;
         
         onEmotionsChanged?.Invoke(currentAnger / maxAnger, currentMelancholy / maxMelancholy);
+        onFaceChanged?.Invoke(normalFace);
         
         // 初始化穴道
         foreach (var acupoint in acupoints)
@@ -146,5 +150,44 @@ public class CustomerController : MonoBehaviour
         GameManager.Instance.OnCustomerFinished(finalTip);
         
         gameObject.SetActive(false);
+    }
+
+    private Coroutine reactionCoroutine;
+    public void ShowReaction(float impactA, float impactM)
+    {
+        Sprite selectedSprite = normalFace;
+
+        if (impactA < 0 || impactM < 0)
+        {
+            if (impactA < impactM)
+            {
+                selectedSprite = angryFace;
+            }
+            else if (impactM < impactA)
+            {
+                selectedSprite = melancholyFace;
+            }
+            else
+            {
+                // Both negative and equal, pick randomly
+                selectedSprite = Random.value > 0.5f ? angryFace : melancholyFace;
+            }
+        }
+        else
+        {
+            // All positive or zero
+            selectedSprite = happyFace;
+        }
+
+        if (reactionCoroutine != null) StopCoroutine(reactionCoroutine);
+        reactionCoroutine = StartCoroutine(ReactionRoutine(selectedSprite));
+    }
+
+    private IEnumerator ReactionRoutine(Sprite reactionSprite)
+    {
+        onFaceChanged?.Invoke(reactionSprite);
+        yield return new WaitForSeconds(1.0f);
+        onFaceChanged?.Invoke(normalFace);
+        reactionCoroutine = null;
     }
 }
