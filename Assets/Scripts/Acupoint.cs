@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,7 +35,7 @@ public class Acupoint : MonoBehaviour
         master = controller;
         elapsedSinceActive = 0f;
         hasTriggered = false;
-        
+
         // 根據類型設置視覺效果 (如果是 Image)
         Image img = GetComponent<Image>();
         if (img != null)
@@ -52,7 +53,7 @@ public class Acupoint : MonoBehaviour
         // 縮放圈圈邏輯 (視覺提示)
         if (approachCircle != null)
         {
-            float scale = Mathf.Lerp(3f, 1f, elapsedSinceActive / lifetime);
+            float scale = Mathf.Lerp(3f, 0.88f, elapsedSinceActive / lifetime);
             approachCircle.localScale = new Vector3(scale, scale, 1);
         }
 
@@ -69,8 +70,18 @@ public class Acupoint : MonoBehaviour
         
         // 計算精準度 (可選)
         float accuracy = 1f - Mathf.Abs((elapsedSinceActive / lifetime) - 0.9f);
+
+        master.ReduceEmotion(type, reductionAmount * accuracy);
         
-        master.ReduceEmotion(type, reductionAmount * (accuracy > 0.8f ? 1.2f : 1f));
+        if (type == CustomerController.EmotionType.Anger)
+        {
+            Debug.Log("減少憤怒情緒值" + reductionAmount * accuracy + "點!");
+        }
+        else
+        {
+            Debug.Log("減少憂鬱情緒值" + reductionAmount * accuracy + "點!");
+        }
+            
         DeactivateAcupoint();
     }
 
