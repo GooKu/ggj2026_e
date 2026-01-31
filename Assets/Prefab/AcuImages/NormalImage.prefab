@@ -88,4 +88,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bcb01ae39c16ad499c28ea5624ef669, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShowMessage
-  ShowTime: 1
+  ShowTime: 0.5
