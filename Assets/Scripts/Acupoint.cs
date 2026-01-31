@@ -8,59 +8,75 @@ public class Acupoint : MonoBehaviour
     public CustomerController.EmotionType type;
     public float reductionAmount = 10f;
     
-    [Header("OSU Mechanics")]
-    public float lifetime = 2f;
+    [Header("Timing Mechanics")]
+    public float spawnTime = 1f; // 該穴位在客人出現後幾秒出現
+    public float lifetime = 2f;  // 出現後存在的時間
     public RectTransform approachCircle;
     
     private CustomerController master;
-    private float aliveTime = 0f;
+    private Button button;
+    private float elapsedSinceActive = 0f;
+    private bool hasTriggered = false;
 
-    public void Setup(CustomerController controller, CustomerController.EmotionType emotionType)
+    private void Awake()
+    {
+        button = GetComponent<Button>();
+        if (button != null)
+        {
+            button.onClick.AddListener(OnAcupointClicked);
+        }
+        // 初始隱藏
+        gameObject.SetActive(false);
+    }
+
+    public void Setup(CustomerController controller)
     {
         master = controller;
-        type = emotionType;
-        aliveTime = 0f;
+        elapsedSinceActive = 0f;
+        hasTriggered = false;
         
-        // Visual feedback based on type
-        // e.g., change color to Red for Anger, Blue for Melancholy
-        GetComponent<SpriteRenderer>().color = (type == CustomerController.EmotionType.Anger) ? Color.red : Color.blue;
+        // 根據類型設置視覺效果 (如果是 Image)
+        Image img = GetComponent<Image>();
+        if (img != null)
+        {
+            img.color = (type == CustomerController.EmotionType.Anger) ? Color.red : Color.blue;
+        }
     }
 
     private void Update()
     {
-        aliveTime += Time.deltaTime;
+        if (hasTriggered) return;
+
+        elapsedSinceActive += Time.deltaTime;
         
-        // Approach circle scaling logic
+        // 縮放圈圈邏輯 (視覺提示)
         if (approachCircle != null)
         {
-            float scale = Mathf.Lerp(3f, 1f, aliveTime / lifetime);
+            float scale = Mathf.Lerp(3f, 1f, elapsedSinceActive / lifetime);
             approachCircle.localScale = new Vector3(scale, scale, 1);
         }
 
-        if (aliveTime >= lifetime)
+        if (elapsedSinceActive >= lifetime)
         {
-            // Missed!
-            DestroyAcupoint();
+            // 時間到，未點擊即隱藏
+            DeactivateAcupoint();
         }
     }
 
-    private void OnMouseDown()
+    private void OnAcupointClicked()
     {
-        // In a real OSU game, we check the scale of approach circle for Perfect/Great/Miss
-        // Here we simplify for the base code
-        float accuracy = 1f - Mathf.Abs((aliveTime / lifetime) - 0.9f); // Best hit near 90% of lifetime
+        if (hasTriggered) return;
         
-        if (accuracy > 0.7f)
-        {
-            master.ReduceEmotion(type, reductionAmount * (accuracy > 0.9f ? 1.5f : 1f));
-            master.SpawnAcupoint(); // Spawn another one to keep the flow
-        }
+        // 計算精準度 (可選)
+        float accuracy = 1f - Mathf.Abs((elapsedSinceActive / lifetime) - 0.9f);
         
-        DestroyAcupoint();
+        master.ReduceEmotion(type, reductionAmount * (accuracy > 0.8f ? 1.2f : 1f));
+        DeactivateAcupoint();
     }
 
-    private void DestroyAcupoint()
+    public void DeactivateAcupoint()
     {
-        Destroy(gameObject);
+        hasTriggered = true;
+        gameObject.SetActive(false);
     }
 }

@@ -12,62 +12,89 @@ public class CustomerController : MonoBehaviour
     public float maxMelancholy = 100f;
     public float currentAnger;
     public float currentMelancholy;
-    public float timer = 15f;
+    public float customerTimer = 15f; // 客人停留總時間
 
-    [Header("Settings")]
-    public GameObject acupointPrefab;
-    public Transform backArea; // Area where acupoints spawn
+    [Header("Predefined Acupoints")]
+    public List<Acupoint> acupoints = new List<Acupoint>();
 
     public UnityEvent<float, float> onEmotionsChanged; // (Anger, Melancholy)
     public UnityEvent<float> onTimerChanged;
 
+    [Header("Spawning Config")]
+    public float spawnInterval = 2.0f; // 穴道生成間隔
+    private float nextSpawnTime;
+    private int lastAcupointIndex = -1;
+
     private bool isActive = false;
+    private float elapsedCustomerTime = 0f;
+    private List<Acupoint> pendingAcupoints = new List<Acupoint>();
 
     public void InitializeCustomer()
     {
         currentAnger = maxAnger;
         currentMelancholy = maxMelancholy;
-        timer = 15f;
+        elapsedCustomerTime = 0f;
         isActive = true;
         
         onEmotionsChanged?.Invoke(currentAnger / maxAnger, currentMelancholy / maxMelancholy);
         
-        SpawnInitialAcupoints();
+        // 初始化穴道
+        foreach (var acupoint in acupoints)
+        {
+            if (acupoint != null)
+            {
+                acupoint.Setup(this);
+                // 確保所有穴道初始狀態為不顯示
+                acupoint.gameObject.SetActive(false);
+            }
+        }
+        
+        nextSpawnTime = 0.5f; // 客人出現後 0.5 秒生成第一個穴道
+        lastAcupointIndex = -1;
     }
 
     private void Update()
     {
         if (!isActive) return;
 
-        timer -= Time.deltaTime;
-        onTimerChanged?.Invoke(timer);
+        elapsedCustomerTime += Time.deltaTime;
+        float remainingTime = customerTimer - elapsedCustomerTime;
+        onTimerChanged?.Invoke(remainingTime);
 
-        if (timer <= 0)
+        // 每隔一段時間生成一個穴道
+        if (elapsedCustomerTime >= nextSpawnTime)
+        {
+            SpawnNextAcupoint();
+            nextSpawnTime = elapsedCustomerTime + spawnInterval;
+        if (remainingTime <= 0)
         {
             FinishCustomer();
         }
     }
 
-    private void SpawnInitialAcupoints()
+    private void SpawnNextAcupoint()
     {
-        // For demonstration, spawn a few random ones
-        for (int i = 0; i < 5; i++)
-        {
-            SpawnAcupoint();
-        }
-    }
+        if (acupoints == null || acupoints.Count == 0) return;
 
-    public void SpawnAcupoint()
-    {
-        if (acupointPrefab == null) return;
-        
-        Vector3 randomPos = new Vector3(Random.Range(-2f, 2f), Random.Range(-2f, 2f), 0);
-        GameObject go = Instantiate(acupointPrefab, backArea.position + randomPos, Quaternion.identity, backArea);
-        
-        Acupoint acupoint = go.GetComponent<Acupoint>();
-        if (acupoint != null)
+        int index;
+        if (acupoints.Count > 1)
         {
-            acupoint.Setup(this, Random.value > 0.5f ? EmotionType.Anger : EmotionType.Melancholy);
+            // 確保不與上一個重複
+            do
+            {
+                index = Random.Range(0, acupoints.Count);
+            } while (index == lastAcupointIndex);
+        }
+        else
+        {
+            index = 0;
+        }
+
+        lastAcupointIndex = index;
+        if (acupoints[index] != null)
+        {
+            acupoints[index].gameObject.SetActive(true);
+            acupoints[index].Setup(this); // 重設狀態
         }
     }
 
@@ -91,14 +118,20 @@ public class CustomerController : MonoBehaviour
         if (!isActive) return;
         isActive = false;
 
-        // Calculate tip: Base tip + bonus for remaining time
+        // 隱藏所有穴位
+        foreach (var acupoint in acupoints)
+        {
+            if (acupoint != null) acupoint.DeactivateAcupoint();
+        }
+
+        // 計算小費
         int baseTip = 10;
-        int timeBonus = Mathf.FloorToInt(timer * 2f);
+        float remainingTime = customerTimer - elapsedCustomerTime;
+        int timeBonus = Mathf.FloorToInt(Mathf.Max(0, remainingTime) * 2f);
         int finalTip = (currentAnger <= 0 && currentMelancholy <= 0) ? (baseTip + timeBonus) : 0;
 
         GameManager.Instance.OnCustomerFinished(finalTip);
         
-        // Disable or destroy customer object
         gameObject.SetActive(false);
     }
 }
