@@ -14,8 +14,14 @@ public class CustomerController : MonoBehaviour
     public float currentMelancholy;
     public float customerTimer = 15f; // 客人停留總時間
 
-    [Header("Predefined Acupoints")]
-    public List<Acupoint> acupoints = new List<Acupoint>();
+    private List<Acupoint> acupoints = new List<Acupoint>();
+
+    private void Awake()
+    {
+        // 自动抓取底下所有的 (包含 inactive 的) Acupoint
+        Acupoint[] foundAcupoints = GetComponentsInChildren<Acupoint>(true);
+        acupoints = new List<Acupoint>(foundAcupoints);
+    }
 
     public UnityEvent<float, float> onEmotionsChanged; // (Anger, Melancholy)
     public UnityEvent<float> onTimerChanged;

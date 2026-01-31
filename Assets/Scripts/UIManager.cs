@@ -52,7 +52,7 @@ public class UIManager : MonoBehaviour
     private void UpdateFace(float a, float m)
     {
         if (faceTimeImage == null) return;
-        var customer = GameManager.Instance.currentCustomer;
+        var customer = GameManager.Instance.CurrentCustomer;
 
         if (a <= 0 && m <= 0) faceTimeImage.sprite = customer.happyFace;
         else if (a > m) faceTimeImage.sprite = customer.angryFace;

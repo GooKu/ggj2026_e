@@ -13,7 +13,8 @@ public class GameManager : MonoBehaviour
     [Header("Spawning")]
     public GameObject[] customerPrefabs;
     public Transform customerSpawnPoint;
-    public CustomerController currentCustomer;
+    
+    public CustomerController CurrentCustomer{get; private set;}
 
     [Header("Events")]
     public UnityEvent<int> onTipsChanged;
@@ -69,9 +70,9 @@ public class GameManager : MonoBehaviour
         if (!isDayActive) return;
         
         // Destroy existing customer if any
-        if (currentCustomer != null)
+        if (CurrentCustomer != null)
         {
-            Destroy(currentCustomer.gameObject);
+            Destroy(CurrentCustomer.gameObject);
         }
 
         if (customerPrefabs == null || customerPrefabs.Length == 0)
@@ -85,21 +86,21 @@ public class GameManager : MonoBehaviour
         // Spawn random prefab
         int randomIndex = Random.Range(0, customerPrefabs.Length);
         GameObject prefab = customerPrefabs[randomIndex];
-        GameObject instance = Instantiate(prefab, customerSpawnPoint != null ? customerSpawnPoint.position : Vector3.zero, Quaternion.identity);
+        GameObject instance = Instantiate(prefab, customerSpawnPoint.position, Quaternion.identity, customerSpawnPoint);
         
-        currentCustomer = instance.GetComponent<CustomerController>();
+        CurrentCustomer = instance.GetComponent<CustomerController>();
         
-        if (currentCustomer != null)
+        if (CurrentCustomer != null)
         {
             // Connect UI events
             UIManager ui = FindFirstObjectByType<UIManager>();
             if (ui != null)
             {
-                currentCustomer.onEmotionsChanged.AddListener(ui.UpdateCustomerEmotions);
-                currentCustomer.onTimerChanged.AddListener(ui.UpdateCustomerTimer);
+                CurrentCustomer.onEmotionsChanged.AddListener(ui.UpdateCustomerEmotions);
+                CurrentCustomer.onTimerChanged.AddListener(ui.UpdateCustomerTimer);
             }
 
-            currentCustomer.InitializeCustomer();
+            CurrentCustomer.InitializeCustomer();
         }
     }
 
@@ -110,9 +111,9 @@ public class GameManager : MonoBehaviour
         onDayEnded?.Invoke();
         Debug.Log("Day ended! Total Tips: " + totalTips);
 
-        if (currentCustomer != null)
+        if (CurrentCustomer != null)
         {
-            currentCustomer.gameObject.SetActive(false);
+            CurrentCustomer.gameObject.SetActive(false);
         }
     }
 
