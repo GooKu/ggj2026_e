@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Game Settings")]
     public float totalDaySeconds = 180f; // 3 mins
+    public int missThreshold = 5;
+    public float missPenalty = 5f;
 
     [Header("Spawning")]
     public GameObject[] customerPrefabs;
