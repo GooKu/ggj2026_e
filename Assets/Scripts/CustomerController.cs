@@ -10,8 +10,10 @@ public class CustomerController : MonoBehaviour
     [Header("Customer Stats")]
     public float maxAnger = 100f;
     public float maxMelancholy = 100f;
-    public float currentAnger;
-    public float currentMelancholy;
+    public float startAnger = 50f;
+    public float startMelancholy = 50f;
+    public float currentAnger{get; private set;}
+    public float currentMelancholy{get; private set;}
     public float customerTimer = 15f; // 客人停留總時間
 
     private List<Acupoint> acupoints = new List<Acupoint>();
@@ -44,8 +46,8 @@ public class CustomerController : MonoBehaviour
 
     public void InitializeCustomer()
     {
-        currentAnger = maxAnger;
-        currentMelancholy = maxMelancholy;
+        currentAnger = startAnger;
+        currentMelancholy = startMelancholy;
         elapsedCustomerTime = 0f;
         isActive = true;
         
