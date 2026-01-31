@@ -40,8 +40,6 @@ public class UIManager : MonoBehaviour
     {
         if (angerImage != null) angerImage.fillAmount = angerNormalized;
         if (melancholyImage != null) melancholyImage.fillAmount = melancholyNormalized;
-
-        UpdateFace(angerNormalized, melancholyNormalized);
     }
 
     public void UpdateCustomerTimer(float time)
@@ -49,13 +47,8 @@ public class UIManager : MonoBehaviour
         if (customerTimerText != null) customerTimerText.text = time.ToString("F1") + "s";
     }
 
-    private void UpdateFace(float a, float m)
+    public void UpdateFaceSprite(Sprite sprite)
     {
-        if (faceTimeImage == null) return;
-        var customer = GameManager.Instance.CurrentCustomer;
-
-        if (a <= 0 && m <= 0) faceTimeImage.sprite = customer.happyFace;
-        else if (a > m) faceTimeImage.sprite = customer.angryFace;
-        else faceTimeImage.sprite = customer.melancholyFace;
+        if (faceTimeImage != null) faceTimeImage.sprite = sprite;
     }
 }
