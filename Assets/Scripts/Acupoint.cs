@@ -1,12 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Acupoint : MonoBehaviour
 {
-    public CustomerController.EmotionType type;
     [Header("Emotion Impact Range (Positive = Reduce, Negative = Increase)")]
     public int minAngerImpact = 5;
     public int maxAngerImpact = 15;
@@ -40,13 +36,6 @@ public class Acupoint : MonoBehaviour
         master = controller;
         elapsedSinceActive = 0f;
         hasTriggered = false;
-
-        // 根據類型設置視覺效果 (如果是 Image)
-        Image img = GetComponent<Image>();
-        if (img != null)
-        {
-            img.color = (type == CustomerController.EmotionType.Anger) ? Color.red : Color.blue;
-        }
     }
 
     private void Update()
