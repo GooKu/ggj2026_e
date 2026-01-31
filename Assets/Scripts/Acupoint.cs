@@ -20,6 +20,10 @@ public class Acupoint : MonoBehaviour
     private float elapsedSinceActive = 0f;
     private bool hasTriggered = false;
 
+    [SerializeField] GameObject perfectImg;
+    [SerializeField] GameObject goodImg;
+    [SerializeField] GameObject badImage;
+
     private void Awake()
     {
         button = GetComponent<Button>();
@@ -76,10 +80,19 @@ public class Acupoint : MonoBehaviour
         {
             GameManager.Instance.AddTips(perfectTipAmount);
             Debug.Log($"Perfect! Immediate tip: {perfectTipAmount}");
+            Instantiate(perfectImg, transform.position, new Quaternion(0, 0, 0, 0), transform.parent);
+        }
+        else if (accuracy > 0.5f)
+        {
+            Instantiate(goodImg, transform.position, new Quaternion(0, 0, 0, 0), transform.parent);
+        }
+        else
+        {
+            Instantiate(badImage, transform.position, new Quaternion(0, 0, 0, 0), transform.parent);
         }
         
         Debug.Log($"穴位點擊 - 憤怒影響: {angerImpact:F1}, 憂鬱影響: {melancholyImpact:F1} (精準度: {accuracy:F2})");
-            
+       
         DeactivateAcupoint();
     }
 
