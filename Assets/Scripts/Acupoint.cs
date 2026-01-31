@@ -8,6 +8,7 @@ public class Acupoint : MonoBehaviour
 {
     public CustomerController.EmotionType type;
     public float reductionAmount = 10f;
+    public int perfectTipAmount = 1;
     
     [Header("Timing Mechanics")]
     public float spawnTime = 1f; // 該穴位在客人出現後幾秒出現
@@ -72,6 +73,12 @@ public class Acupoint : MonoBehaviour
         float accuracy = 1f - Mathf.Abs((elapsedSinceActive / lifetime) - 0.9f);
 
         master.ReduceEmotion(type, reductionAmount * accuracy);
+        
+        if (accuracy > 0.9f)
+        {
+            GameManager.Instance.AddTips(perfectTipAmount);
+            Debug.Log($"Perfect! Immediate tip: {perfectTipAmount}");
+        }
         
         if (type == CustomerController.EmotionType.Anger)
         {
