@@ -14,15 +14,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 44861849728649841, guid: 2ad15311390707e4d9b6473d86bc626b, type: 3}
       propertyPath: m_Color.b
-      value: 1
+      value: 0.015686274
       objectReference: {fileID: 0}
     - target: {fileID: 44861849728649841, guid: 2ad15311390707e4d9b6473d86bc626b, type: 3}
       propertyPath: m_Color.g
-      value: 0.1404357
+      value: 0.88313425
       objectReference: {fileID: 0}
     - target: {fileID: 44861849728649841, guid: 2ad15311390707e4d9b6473d86bc626b, type: 3}
       propertyPath: m_Color.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 824048244809652976, guid: 2ad15311390707e4d9b6473d86bc626b, type: 3}
       propertyPath: m_SizeDelta.y
@@ -30,7 +30,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2203764244564980739, guid: 2ad15311390707e4d9b6473d86bc626b, type: 3}
       propertyPath: m_Name
-      value: MAcuPoint
+      value: GoldPoint
       objectReference: {fileID: 0}
     - target: {fileID: 4154586016007704638, guid: 2ad15311390707e4d9b6473d86bc626b, type: 3}
       propertyPath: type
@@ -42,15 +42,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8072801243061642078, guid: 2ad15311390707e4d9b6473d86bc626b, type: 3}
       propertyPath: m_Color.b
-      value: 1
+      value: 0.015686275
       objectReference: {fileID: 0}
     - target: {fileID: 8072801243061642078, guid: 2ad15311390707e4d9b6473d86bc626b, type: 3}
       propertyPath: m_Color.g
-      value: 0.14117648
+      value: 0.8862745
       objectReference: {fileID: 0}
     - target: {fileID: 8072801243061642078, guid: 2ad15311390707e4d9b6473d86bc626b, type: 3}
       propertyPath: m_Color.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8204602610108296793, guid: 2ad15311390707e4d9b6473d86bc626b, type: 3}
       propertyPath: m_Pivot.x
