@@ -119,6 +119,12 @@ MonoBehaviour:
   onFaceChanged:
     m_PersistentCalls:
       m_Calls: []
+  onDialogueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  moodDialoguesHappy: []
+  moodDialoguesAngry: []
+  moodDialoguesMelancholy: []
   spawnInterval: 0.8
 --- !u!1 &4112559662213974261
 GameObject:

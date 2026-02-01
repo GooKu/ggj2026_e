@@ -86,7 +86,7 @@ public class Acupoint : MonoBehaviour
             GameManager.Instance.AddTips(perfectTipAmount);
             Debug.Log($"Perfect! Immediate tip: {perfectTipAmount}");
             if (perfectImg != null) Instantiate(perfectImg, transform.position + new Vector3(0,70,0), Quaternion.identity, transform.parent);
-            if (perfectEffect != null) Instantiate(perfectEffect, transform.position , Quaternion.identity, transform.parent);
+            if (perfectEffect != null) Instantiate(perfectEffect, transform.position + new Vector3(0, 0, 10), Quaternion.identity, transform.parent);
         }
         else
         {

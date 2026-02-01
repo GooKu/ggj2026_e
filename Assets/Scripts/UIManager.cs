@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateTips(int amount)
     {
-        if (totalTipsText != null) totalTipsText.text = "Tips: " + amount;
+        if (totalTipsText != null) totalTipsText.text = amount.ToString();
     }
 
     public void UpdateDayTimer(float time)
