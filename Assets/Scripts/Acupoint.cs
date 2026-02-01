@@ -83,6 +83,7 @@ public class Acupoint : MonoBehaviour
 
         if (accuracy > 0.9f)
         {
+            if (master != null) AudioManager.Instance.PlaySFX(master.perfectPressSound);
             GameManager.Instance.AddTips(perfectTipAmount);
             Debug.Log($"Perfect! Immediate tip: {perfectTipAmount}");
             if (perfectImg != null) Instantiate(perfectImg, transform.position + new Vector3(0,70,0), Quaternion.identity, transform.parent);
@@ -90,6 +91,7 @@ public class Acupoint : MonoBehaviour
         }
         else
         {
+            if (master != null) AudioManager.Instance.PlaySFX(master.normalPressSound);
             if (goodImg != null) Instantiate(goodImg, transform.position + new Vector3(0, 70, 0), Quaternion.identity, transform.parent);
         }
         

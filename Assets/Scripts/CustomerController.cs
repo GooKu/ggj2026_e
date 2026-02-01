@@ -43,6 +43,10 @@ public class CustomerController : MonoBehaviour
     public List<string> moodDialoguesHappy;
     public List<string> moodDialoguesAngry;
     public List<string> moodDialoguesMelancholy;
+    
+    [Header("Audio")]
+    public AudioClip perfectPressSound;
+    public AudioClip normalPressSound;
 
     [Header("Spawning Config")]
     public float spawnInterval = 2.0f; // 穴道生成間隔

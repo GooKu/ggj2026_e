@@ -151,6 +151,8 @@ MonoBehaviour:
   - "\u5509\uFF0C\u771F\u53EF\u60B2\u22EF\u22EF"
   - "\u70BA\u4EC0\u9EBC\u6211\u6703\u6D3B\u6210\u9019\u6A23\u22EF\u22EF"
   - "\u4E0D\u60F3\u52AA\u529B\u4E86\u22EF\u22EF"
+  perfectPressSound: {fileID: 8300000, guid: 9ca337bb2c4077b479e841d8c6932dde, type: 3}
+  normalPressSound: {fileID: 8300000, guid: 2bcc6e3a2171f6f4c929185a73a669fd, type: 3}
   spawnInterval: 0.8
 --- !u!1 &4112559662213974261
 GameObject:
