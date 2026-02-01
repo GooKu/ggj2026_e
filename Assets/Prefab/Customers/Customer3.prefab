@@ -120,6 +120,10 @@ MonoBehaviour:
   onDialogueChanged:
     m_PersistentCalls:
       m_Calls: []
+  in_melancholy:
+  - "(\uFF61\xB4\uFE3F\uFF40\uFF61) ... [ IDLE ]"
+  in_anger:
+  - "(\uFF9F\u76BF\uFF9F\uFF92) [ WARNING ]"
   moodDialoguesHappy:
   - "d(`\uFF65\u2200\uFF65)b"
   - "(\u0E51\u02D8 \u1D17 \u02D8\u0E51)"

@@ -38,6 +38,8 @@ public class CustomerController : MonoBehaviour
     public UnityEvent<string> onDialogueChanged;
 
     [Header("Dialogues")]
+    public List<string> in_melancholy;
+    public List<string> in_anger;
     public List<string> moodDialoguesHappy;
     public List<string> moodDialoguesAngry;
     public List<string> moodDialoguesMelancholy;
@@ -61,6 +63,33 @@ public class CustomerController : MonoBehaviour
         
         onEmotionsChanged?.Invoke(currentAnger / maxAnger, currentMelancholy / maxMelancholy);
         onFaceChanged?.Invoke(GetIdleFace());
+
+        // 登場台詞
+        if (currentAnger > currentMelancholy)
+        {
+            if (in_anger != null && in_anger.Count > 0)
+            {
+                string line = in_anger[Random.Range(0, in_anger.Count)];
+                onDialogueChanged?.Invoke(line);
+            }
+        }
+        else if (currentMelancholy > currentAnger)
+        {
+            if (in_melancholy != null && in_melancholy.Count > 0)
+            {
+                string line = in_melancholy[Random.Range(0, in_melancholy.Count)];
+                onDialogueChanged?.Invoke(line);
+            }
+        }
+        else
+        {
+            List<string> selectedList = Random.value > 0.5f ? in_anger : in_melancholy;
+            if (selectedList != null && selectedList.Count > 0)
+            {
+                string line = selectedList[Random.Range(0, selectedList.Count)];
+                onDialogueChanged?.Invoke(line);
+            }
+        }
         
         // 初始化穴道
         foreach (var acupoint in acupoints)
