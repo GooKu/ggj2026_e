@@ -51,6 +51,12 @@ public class GameManager : MonoBehaviour
             onTipsChanged.AddListener(ui.UpdateTips);
             onDayTimeRemainingChanged.AddListener(ui.UpdateDayTimer);
         }
+
+        // Play Start Game BGM
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayStartGameBGM();
+        }
     }
 
     public void StartGame()
@@ -63,6 +69,12 @@ public class GameManager : MonoBehaviour
         isPaused = false;
         onTipsChanged?.Invoke(totalTips);
         
+        // Play In Game BGM
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayInGameBGM();
+        }
+
         StartNextCustomer();
     }
 

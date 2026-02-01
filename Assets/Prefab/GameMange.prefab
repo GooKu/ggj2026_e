@@ -75,6 +75,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3181633977a28cb46892c4b8070e9c8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
+  startGameBGM: {fileID: 8300000, guid: 071a693e3d861354f9448b81f27e13b3, type: 3}
+  inGameBGM: {fileID: 8300000, guid: bbe05154370c71d43b125622c5377d78, type: 3}
   clickSound: {fileID: 0}
 --- !u!1001 &6487688359318356082
 PrefabInstance:
