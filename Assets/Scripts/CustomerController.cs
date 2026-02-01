@@ -35,6 +35,12 @@ public class CustomerController : MonoBehaviour
     public Sprite happyFace;
 
     public UnityEvent<Sprite> onFaceChanged;
+    public UnityEvent<string> onDialogueChanged;
+
+    [Header("Dialogues")]
+    public List<string> moodDialoguesHappy;
+    public List<string> moodDialoguesAngry;
+    public List<string> moodDialoguesMelancholy;
 
     [Header("Spawning Config")]
     public float spawnInterval = 2.0f; // 穴道生成間隔
@@ -202,36 +208,51 @@ public class CustomerController : MonoBehaviour
     public void ShowReaction(float impactA, float impactM)
     {
         Sprite selectedSprite = normalFace;
+        List<string> selectedList = moodDialoguesHappy;
 
         if (impactA < 0 || impactM < 0)
         {
             if (impactA < impactM)
             {
                 selectedSprite = angryFace;
+                selectedList = moodDialoguesAngry;
             }
             else if (impactM < impactA)
             {
                 selectedSprite = melancholyFace;
+                selectedList = moodDialoguesMelancholy;
             }
             else
             {
                 // Both negative and equal, pick randomly
-                selectedSprite = Random.value > 0.5f ? angryFace : melancholyFace;
+                bool pickAngry = Random.value > 0.5f;
+                selectedSprite = pickAngry ? angryFace : melancholyFace;
+                selectedList = pickAngry ? moodDialoguesAngry : moodDialoguesMelancholy;
             }
         }
         else
         {
             // All positive or zero
             selectedSprite = happyFace;
+            selectedList = moodDialoguesHappy;
+        }
+
+        string randomText = "";
+        if (selectedList != null && selectedList.Count > 0)
+        {
+            randomText = selectedList[Random.Range(0, selectedList.Count)];
         }
 
         if (reactionCoroutine != null) StopCoroutine(reactionCoroutine);
-        reactionCoroutine = StartCoroutine(ReactionRoutine(selectedSprite));
+        reactionCoroutine = StartCoroutine(ReactionRoutine(selectedSprite, randomText));
     }
 
-    private IEnumerator ReactionRoutine(Sprite reactionSprite)
+    private IEnumerator ReactionRoutine(Sprite reactionSprite, string reactionText)
     {
         onFaceChanged?.Invoke(reactionSprite);
+        if (!string.IsNullOrEmpty(reactionText)) 
+            onDialogueChanged?.Invoke(reactionText);
+            
         yield return new WaitForSeconds(1.0f);
         onFaceChanged?.Invoke(normalFace);
         reactionCoroutine = null;

@@ -120,6 +120,8 @@ public class GameManager : MonoBehaviour
                 CurrentCustomer.onEmotionsChanged.AddListener(ui.UpdateCustomerEmotions);
                 CurrentCustomer.onTimerChanged.AddListener(ui.UpdateCustomerTimer);
                 CurrentCustomer.onFaceChanged.AddListener(ui.UpdateFaceSprite);
+                CurrentCustomer.onDialogueChanged.AddListener(ui.ShowDialogue);
+                ui.ClearDialogues();
             }
 
             CurrentCustomer.InitializeCustomer();

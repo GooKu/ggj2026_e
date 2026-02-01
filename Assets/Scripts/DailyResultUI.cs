@@ -11,15 +11,19 @@ public class DailyResultUI : MonoBehaviour
 
     [Header("Review Pool")]
     public string[] perfectReviews = new string[] {
-        "手法太棒了！就像在雲端一樣！",
-        "這是我按過最舒服的一次，技術驚人！",
-        "完全恢復了精神，師傅真是高手！"
+        "師傅的手法令我著迷",
+        "我會推薦朋友來 <3",
+        "10/10",
+        "真是太烏茲哭西了⋯⋯",
+        "一定是大拇指的啦"
     };
 
     public string[] normalReviews = new string[] {
-        "還不錯，感覺放鬆了不少。",
-        "手法中規中矩，之後會考慮再來。",
-        "謝謝師傅，感覺好多了。"
+        "做 der 好 社會點數 +15",
+        "CP 值過低，不會回購",
+        "開心 ( ^ _ ^ )",
+        "會再來，要更進步唷 <3",
+        "可再接再厲"
     };
 
     public void Setup(int tips, int perfectCount, int totalCount)
