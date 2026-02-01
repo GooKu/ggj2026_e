@@ -138,6 +138,8 @@ MonoBehaviour:
   - "(\u30CE\u0434\u30FD) ..."
   - "(\u3012\uFE3F\u3012) ..."
   - (x_x) ...
+  perfectPressSound: {fileID: 8300000, guid: 606d0ae5d78335d4d9107da870497a6a, type: 3}
+  normalPressSound: {fileID: 8300000, guid: e1a89d2839a741f4dbf257e7679b2232, type: 3}
   spawnInterval: 0.8
 --- !u!1 &4112559662213974261
 GameObject:
