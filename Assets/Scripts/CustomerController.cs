@@ -261,6 +261,8 @@ public class CustomerController : MonoBehaviour
             else if (selectedSprite == happyFace) selectedList = moodDialoguesHappy;
         }
 
+        if (!gameObject.activeSelf) { return; }
+
         string reactionLine = "";
         if (selectedList != null && selectedList.Count > 0)
         {
