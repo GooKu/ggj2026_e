@@ -4,6 +4,8 @@ using TMPro;
 
 public class DailyResultUI : MonoBehaviour
 {
+    [SerializeField] private AudioClip goodSfx;
+    [SerializeField] private AudioClip badSfx;
     [Header("UI Elements")]
     public Text tipsText;
     public Text perfectServicesText;
@@ -31,12 +33,15 @@ public class DailyResultUI : MonoBehaviour
         if (tipsText != null) tipsText.text = $"小費: ${tips}";
         if (perfectServicesText != null) perfectServicesText.text = $"完美服務: {perfectCount}/{totalCount}";
 
+        float ratio = totalCount > 0 ? (float)perfectCount / totalCount : 0;
+        bool isPrefect = ratio >= 0.8f;
+
         if (reviewText != null)
         {
-            float ratio = totalCount > 0 ? (float)perfectCount / totalCount : 0;
-            string[] pool = ratio >= 0.8f ? perfectReviews : normalReviews;
+            string[] pool = isPrefect ? perfectReviews : normalReviews;
             reviewText.text = $"{pool[Random.Range(0, pool.Length)]}";
         }
+        AudioManager.Instance.PlaySFX(isPrefect ? goodSfx : badSfx);
     }
 
     public void OnNextDayClick()
