@@ -117,6 +117,21 @@ MonoBehaviour:
   onFaceChanged:
     m_PersistentCalls:
       m_Calls: []
+  onDialogueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  moodDialoguesHappy:
+  - "d(`\uFF65\u2200\uFF65)b"
+  - "(\u0E51\u02D8 \u1D17 \u02D8\u0E51)"
+  - "(\uFF89>\u03C9<)\uFF89"
+  moodDialoguesAngry:
+  - "(\uFF9F\u76BF\uFF9F\uFF92)"
+  - "(#`\u76BF\xB4)"
+  - "(`\u0434\xB4)"
+  moodDialoguesMelancholy:
+  - "(\u30CE\u0434\u30FD) ..."
+  - "(\u3012\uFE3F\u3012) ..."
+  - (x_x) ...
   spawnInterval: 0.8
 --- !u!1 &4112559662213974261
 GameObject:
