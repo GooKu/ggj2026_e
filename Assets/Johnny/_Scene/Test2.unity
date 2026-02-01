@@ -427,9 +427,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1199643637595058364, guid: f259fa80d351f774caf78555c56b577a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -170
+      objectReference: {fileID: 0}
     - target: {fileID: 2024986531571086310, guid: f259fa80d351f774caf78555c56b577a, type: 3}
       propertyPath: customerPrefabs.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2024986531571086310, guid: f259fa80d351f774caf78555c56b577a, type: 3}
       propertyPath: 'customerPrefabs.Array.data[0]'
