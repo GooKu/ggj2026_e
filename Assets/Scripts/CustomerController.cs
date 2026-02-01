@@ -241,11 +241,30 @@ public class CustomerController : MonoBehaviour
     private Coroutine reactionCoroutine;
     public void ShowReaction(bool isPerfect)
     {
-        Sprite selectedSprite = isPerfect ? happyFace : normalFace;
-        List<string> selectedList = isPerfect ? moodDialoguesHappy : null; // 平靜表情暫時沒有專屬對話
+        Sprite selectedSprite;
+        List<string> selectedList = null;
+
+        if (isPerfect)
+        {
+            selectedSprite = happyFace;
+            selectedList = moodDialoguesHappy;
+        }
+        else
+        {
+            selectedSprite = GetIdleFace();
+            if (selectedSprite == angryFace) selectedList = moodDialoguesAngry;
+            else if (selectedSprite == melancholyFace) selectedList = moodDialoguesMelancholy;
+            else if (selectedSprite == happyFace) selectedList = moodDialoguesHappy;
+        }
+
+        string reactionLine = "";
+        if (selectedList != null && selectedList.Count > 0)
+        {
+            reactionLine = selectedList[Random.Range(0, selectedList.Count)];
+        }
 
         if (reactionCoroutine != null) StopCoroutine(reactionCoroutine);
-        reactionCoroutine = StartCoroutine(ReactionRoutine(selectedSprite, ""));
+        reactionCoroutine = StartCoroutine(ReactionRoutine(selectedSprite, reactionLine));
     }
 
     public Sprite GetIdleFace()
