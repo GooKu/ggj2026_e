@@ -61,7 +61,7 @@ public class Acupoint : MonoBehaviour
         {
             // 時間到，未點擊即隱藏
             master.RegisterMiss();
-            if (badImage != null) Instantiate(badImage, transform.position + new Vector3(0, 70, 0), Quaternion.identity, transform.parent);
+            if (badImage != null) Instantiate(badImage, transform.position + new Vector3(0, 0.7f, 0), Quaternion.identity, transform.parent);
             DeactivateAcupoint();
         }
     }
@@ -86,13 +86,13 @@ public class Acupoint : MonoBehaviour
             if (master != null) AudioManager.Instance.PlaySFX(master.perfectPressSound);
             GameManager.Instance.AddTips(perfectTipAmount);
             Debug.Log($"Perfect! Immediate tip: {perfectTipAmount}");
-            if (perfectImg != null) Instantiate(perfectImg, transform.position + new Vector3(0,70,0), Quaternion.identity, transform.parent);
-            if (perfectEffect != null) Instantiate(perfectEffect, transform.position + new Vector3(0, 0, 10), Quaternion.identity, transform.parent);
+            if (perfectImg != null) Instantiate(perfectImg, transform.position + new Vector3(0, 0.7f, 0), Quaternion.identity, transform.parent);
+            if (perfectEffect != null) Instantiate(perfectEffect, transform.position, Quaternion.identity, transform.parent);
         }
         else
         {
             if (master != null) AudioManager.Instance.PlaySFX(master.normalPressSound);
-            if (goodImg != null) Instantiate(goodImg, transform.position + new Vector3(0, 70, 0), Quaternion.identity, transform.parent);
+            if (goodImg != null) Instantiate(goodImg, transform.position + new Vector3(0, 0.7f, 0), Quaternion.identity, transform.parent);
         }
         
         Debug.Log($"穴位點擊 - 憤怒影響: {angerImpact:F1}, 憂鬱影響: {melancholyImpact:F1} (精準度: {accuracy:F2})");
