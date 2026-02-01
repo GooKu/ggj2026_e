@@ -4,6 +4,7 @@ using System.Collections;
 
 public class CustomerResultUI : MonoBehaviour
 {
+    [SerializeField] private AudioClip sfx;
     [Header("UI Elements")]
     public Text tipText;
     public GameObject perfectGroup;
@@ -19,6 +20,7 @@ public class CustomerResultUI : MonoBehaviour
         tipText.text = "$" + tips;
         perfectGroup.SetActive(isPerfect);
         disappointingGroup.SetActive(!isPerfect);
+        AudioManager.Instance.PlaySFX(sfx);
 
         StopAllCoroutines();
         StartCoroutine(AutoHideRoutine());
