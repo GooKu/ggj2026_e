@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4374596899458224706}
   - component: {fileID: 2024986531571086310}
+  - component: {fileID: 3827114529656254249}
   m_Layer: 0
   m_Name: GameMange
   m_TagString: Untagged
@@ -46,6 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   totalDaySeconds: 180
+  missThreshold: 5
+  missPenalty: 5
   customerPrefabs:
   - {fileID: 3203320805314674398, guid: e56030608dbd6114ebf56b8658abdf2b, type: 3}
   customerSpawnPoint: {fileID: 1199643637595058364}
@@ -60,6 +63,19 @@ MonoBehaviour:
       m_Calls: []
   dailyResultUI: {fileID: 3204582207550504124}
   customerResultUI: {fileID: 1331552973289019883}
+--- !u!114 &3827114529656254249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2363814093681306579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3181633977a28cb46892c4b8070e9c8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioManager
+  clickSound: {fileID: 0}
 --- !u!1001 &6487688359318356082
 PrefabInstance:
   m_ObjectHideFlags: 0
