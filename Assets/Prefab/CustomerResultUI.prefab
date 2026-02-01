@@ -556,6 +556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60c5c106333e6f04a9672b5c6ea5319e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CustomerResultUI
+  sfx: {fileID: 8300000, guid: 243c18a5add395846be6623cd3ae6aa0, type: 3}
   tipText: {fileID: 8877301913619996874}
   perfectGroup: {fileID: 8741616463206497558}
   disappointingGroup: {fileID: 7898743358928560148}

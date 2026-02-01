@@ -165,6 +165,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd1836bb3e31a4f4bbc200cac6bd9807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DailyResultUI
+  goodSfx: {fileID: 8300000, guid: 520904b8669357e4e932bb0a759b84c4, type: 3}
+  badSfx: {fileID: 8300000, guid: 95d67579f26361c4b9429e323f05442b, type: 3}
   tipsText: {fileID: 8170375859989052608}
   perfectServicesText: {fileID: 3023343631206163827}
   reviewText: {fileID: 7880834337931419997}
