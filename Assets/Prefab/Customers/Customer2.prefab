@@ -117,6 +117,12 @@ MonoBehaviour:
   onFaceChanged:
     m_PersistentCalls:
       m_Calls: []
+  onDialogueChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  moodDialoguesHappy: []
+  moodDialoguesAngry: []
+  moodDialoguesMelancholy: []
   spawnInterval: 0.8
 --- !u!1 &4112559662213974261
 GameObject:
@@ -215,11 +221,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 228821666172519862, guid: 9309ebff9cf5bb2439871f6f038acb45, type: 3}
       propertyPath: maxMelancholyImpact
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 228821666172519862, guid: 9309ebff9cf5bb2439871f6f038acb45, type: 3}
       propertyPath: minMelancholyImpact
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2599045413181923723, guid: 9309ebff9cf5bb2439871f6f038acb45, type: 3}
       propertyPath: m_Name
@@ -341,11 +347,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 228821666172519862, guid: 9309ebff9cf5bb2439871f6f038acb45, type: 3}
       propertyPath: maxMelancholyImpact
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 228821666172519862, guid: 9309ebff9cf5bb2439871f6f038acb45, type: 3}
       propertyPath: minMelancholyImpact
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2599045413181923723, guid: 9309ebff9cf5bb2439871f6f038acb45, type: 3}
       propertyPath: m_Name
@@ -467,11 +473,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 228821666172519862, guid: 9309ebff9cf5bb2439871f6f038acb45, type: 3}
       propertyPath: maxMelancholyImpact
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 228821666172519862, guid: 9309ebff9cf5bb2439871f6f038acb45, type: 3}
       propertyPath: minMelancholyImpact
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2599045413181923723, guid: 9309ebff9cf5bb2439871f6f038acb45, type: 3}
       propertyPath: m_Name
@@ -590,6 +596,14 @@ PrefabInstance:
     - target: {fileID: 2831245391316638680, guid: e69031a92b81634478c8beb31cfa92cc, type: 3}
       propertyPath: lifetime
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831245391316638680, guid: e69031a92b81634478c8beb31cfa92cc, type: 3}
+      propertyPath: maxAngerImpact
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831245391316638680, guid: e69031a92b81634478c8beb31cfa92cc, type: 3}
+      propertyPath: minAngerImpact
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2831245391316638680, guid: e69031a92b81634478c8beb31cfa92cc, type: 3}
       propertyPath: maxMelancholyImpact
@@ -711,11 +725,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 228821666172519862, guid: 9309ebff9cf5bb2439871f6f038acb45, type: 3}
       propertyPath: maxMelancholyImpact
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 228821666172519862, guid: 9309ebff9cf5bb2439871f6f038acb45, type: 3}
       propertyPath: minMelancholyImpact
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2599045413181923723, guid: 9309ebff9cf5bb2439871f6f038acb45, type: 3}
       propertyPath: m_Name
@@ -836,6 +850,14 @@ PrefabInstance:
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2831245391316638680, guid: e69031a92b81634478c8beb31cfa92cc, type: 3}
+      propertyPath: maxAngerImpact
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831245391316638680, guid: e69031a92b81634478c8beb31cfa92cc, type: 3}
+      propertyPath: minAngerImpact
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831245391316638680, guid: e69031a92b81634478c8beb31cfa92cc, type: 3}
       propertyPath: maxMelancholyImpact
       value: -5
       objectReference: {fileID: 0}
@@ -954,6 +976,14 @@ PrefabInstance:
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2831245391316638680, guid: e69031a92b81634478c8beb31cfa92cc, type: 3}
+      propertyPath: maxAngerImpact
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831245391316638680, guid: e69031a92b81634478c8beb31cfa92cc, type: 3}
+      propertyPath: minAngerImpact
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831245391316638680, guid: e69031a92b81634478c8beb31cfa92cc, type: 3}
       propertyPath: maxMelancholyImpact
       value: -5
       objectReference: {fileID: 0}
@@ -1070,6 +1100,14 @@ PrefabInstance:
     - target: {fileID: 2831245391316638680, guid: e69031a92b81634478c8beb31cfa92cc, type: 3}
       propertyPath: lifetime
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831245391316638680, guid: e69031a92b81634478c8beb31cfa92cc, type: 3}
+      propertyPath: maxAngerImpact
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831245391316638680, guid: e69031a92b81634478c8beb31cfa92cc, type: 3}
+      propertyPath: minAngerImpact
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2831245391316638680, guid: e69031a92b81634478c8beb31cfa92cc, type: 3}
       propertyPath: maxMelancholyImpact
@@ -1191,11 +1229,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 228821666172519862, guid: 9309ebff9cf5bb2439871f6f038acb45, type: 3}
       propertyPath: maxMelancholyImpact
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 228821666172519862, guid: 9309ebff9cf5bb2439871f6f038acb45, type: 3}
       propertyPath: minMelancholyImpact
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2599045413181923723, guid: 9309ebff9cf5bb2439871f6f038acb45, type: 3}
       propertyPath: m_Name
@@ -1314,6 +1352,14 @@ PrefabInstance:
     - target: {fileID: 2831245391316638680, guid: e69031a92b81634478c8beb31cfa92cc, type: 3}
       propertyPath: lifetime
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831245391316638680, guid: e69031a92b81634478c8beb31cfa92cc, type: 3}
+      propertyPath: maxAngerImpact
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2831245391316638680, guid: e69031a92b81634478c8beb31cfa92cc, type: 3}
+      propertyPath: minAngerImpact
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2831245391316638680, guid: e69031a92b81634478c8beb31cfa92cc, type: 3}
       propertyPath: maxMelancholyImpact
