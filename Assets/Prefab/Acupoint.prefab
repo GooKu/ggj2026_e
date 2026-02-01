@@ -145,7 +145,7 @@ MonoBehaviour:
   perfectImg: {fileID: 7405178369536356482, guid: 333f75be7aa8fc341a93c8c256bccc2d, type: 3}
   goodImg: {fileID: 7405178369536356482, guid: c13e5d00fc562bb41b5954d39312abbf, type: 3}
   badImage: {fileID: 7405178369536356482, guid: 7c98e6624e421ec49b6bb5ed5106dab2, type: 3}
-  perfectEffect: {fileID: 0}
+  perfectEffect: {fileID: 1417388688163431623, guid: eb8f87b6138cca04bb6c651507569628, type: 3}
 --- !u!1 &3507912558806929388
 GameObject:
   m_ObjectHideFlags: 0

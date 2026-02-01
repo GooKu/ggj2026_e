@@ -363,6 +363,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameMange
       objectReference: {fileID: 0}
+    - target: {fileID: 4103627348191669765, guid: f259fa80d351f774caf78555c56b577a, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 519420031}
+    - target: {fileID: 4103627348191669765, guid: f259fa80d351f774caf78555c56b577a, type: 3}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4374596899458224706, guid: f259fa80d351f774caf78555c56b577a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
