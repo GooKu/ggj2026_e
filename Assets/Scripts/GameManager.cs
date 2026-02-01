@@ -51,7 +51,6 @@ public class GameManager : MonoBehaviour
             onTipsChanged.AddListener(ui.UpdateTips);
             onDayTimeRemainingChanged.AddListener(ui.UpdateDayTimer);
         }
-        StartGame();
     }
 
     public void StartGame()

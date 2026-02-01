@@ -188,6 +188,7 @@ GameObject:
   - component: {fileID: 3426028816594223104}
   - component: {fileID: 7715280762609835659}
   - component: {fileID: 2243447916284791258}
+  - component: {fileID: 4904185681454045019}
   m_Layer: 5
   m_Name: NextDayButton
   m_TagString: Untagged
@@ -309,6 +310,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &4904185681454045019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1428602667268434031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1a605231bdeda84884a12bd2eb3a65d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIButtonAudio
+  customClickSound: {fileID: 0}
 --- !u!1 &1475957922291654014
 GameObject:
   m_ObjectHideFlags: 0

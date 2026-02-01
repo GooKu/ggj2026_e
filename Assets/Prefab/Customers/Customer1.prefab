@@ -116,18 +116,6 @@ MonoBehaviour:
   onFaceChanged:
     m_PersistentCalls:
       m_Calls: []
-  onDialogueChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  moodDialoguesHappy:
-  - "\u6C6A\uFF01"
-  - "\u547C\u5695\u22EF\u22EF"
-  moodDialoguesAngry:
-  - "\u543C\u2014\u2014\uFF01"
-  - "\u543C\u543C\uFF01\uFF01\uFF01"
-  moodDialoguesMelancholy:
-  - "\u55F7\u55DA\u22EF\u22EF"
-  - "\u55F7\u55F7\u22EF\u22EF\u55DA\u22EF\u22EF"
   spawnInterval: 0.8
 --- !u!1 &4112559662213974261
 GameObject:
@@ -352,11 +340,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2831245391316638680, guid: e69031a92b81634478c8beb31cfa92cc, type: 3}
       propertyPath: maxMelancholyImpact
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 2831245391316638680, guid: e69031a92b81634478c8beb31cfa92cc, type: 3}
       propertyPath: minMelancholyImpact
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 8015859558053143999, guid: e69031a92b81634478c8beb31cfa92cc, type: 3}
       propertyPath: m_Pivot.x
@@ -848,11 +836,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2831245391316638680, guid: e69031a92b81634478c8beb31cfa92cc, type: 3}
       propertyPath: maxMelancholyImpact
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 2831245391316638680, guid: e69031a92b81634478c8beb31cfa92cc, type: 3}
       propertyPath: minMelancholyImpact
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 8015859558053143999, guid: e69031a92b81634478c8beb31cfa92cc, type: 3}
       propertyPath: m_Pivot.x
@@ -966,11 +954,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2831245391316638680, guid: e69031a92b81634478c8beb31cfa92cc, type: 3}
       propertyPath: maxMelancholyImpact
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 2831245391316638680, guid: e69031a92b81634478c8beb31cfa92cc, type: 3}
       propertyPath: minMelancholyImpact
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 8015859558053143999, guid: e69031a92b81634478c8beb31cfa92cc, type: 3}
       propertyPath: m_Pivot.x
@@ -1210,11 +1198,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2831245391316638680, guid: e69031a92b81634478c8beb31cfa92cc, type: 3}
       propertyPath: maxMelancholyImpact
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 2831245391316638680, guid: e69031a92b81634478c8beb31cfa92cc, type: 3}
       propertyPath: minMelancholyImpact
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 8015859558053143999, guid: e69031a92b81634478c8beb31cfa92cc, type: 3}
       propertyPath: m_Pivot.x

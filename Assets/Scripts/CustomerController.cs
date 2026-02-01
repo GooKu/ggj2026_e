@@ -60,7 +60,7 @@ public class CustomerController : MonoBehaviour
         isActive = true;
         
         onEmotionsChanged?.Invoke(currentAnger / maxAnger, currentMelancholy / maxMelancholy);
-        onFaceChanged?.Invoke(normalFace);
+        onFaceChanged?.Invoke(GetIdleFace());
         
         // 初始化穴道
         foreach (var acupoint in acupoints)
@@ -145,6 +145,11 @@ public class CustomerController : MonoBehaviour
         {
             FinishCustomer(false);
         }
+        else if (reactionCoroutine == null)
+        {
+            // 如果不在點擊反應中，依據當前數值更新表情
+            onFaceChanged?.Invoke(GetIdleFace());
+        }
     }
 
     public void RegisterHit()
@@ -205,46 +210,24 @@ public class CustomerController : MonoBehaviour
     }
 
     private Coroutine reactionCoroutine;
-    public void ShowReaction(float impactA, float impactM)
+    public void ShowReaction(bool isPerfect)
     {
-        Sprite selectedSprite = normalFace;
-        List<string> selectedList = moodDialoguesHappy;
-
-        if (impactA < 0 || impactM < 0)
-        {
-            if (impactA < impactM)
-            {
-                selectedSprite = angryFace;
-                selectedList = moodDialoguesAngry;
-            }
-            else if (impactM < impactA)
-            {
-                selectedSprite = melancholyFace;
-                selectedList = moodDialoguesMelancholy;
-            }
-            else
-            {
-                // Both negative and equal, pick randomly
-                bool pickAngry = Random.value > 0.5f;
-                selectedSprite = pickAngry ? angryFace : melancholyFace;
-                selectedList = pickAngry ? moodDialoguesAngry : moodDialoguesMelancholy;
-            }
-        }
-        else
-        {
-            // All positive or zero
-            selectedSprite = happyFace;
-            selectedList = moodDialoguesHappy;
-        }
-
-        string randomText = "";
-        if (selectedList != null && selectedList.Count > 0)
-        {
-            randomText = selectedList[Random.Range(0, selectedList.Count)];
-        }
+        Sprite selectedSprite = isPerfect ? happyFace : normalFace;
+        List<string> selectedList = isPerfect ? moodDialoguesHappy : null; // 平靜表情暫時沒有專屬對話
 
         if (reactionCoroutine != null) StopCoroutine(reactionCoroutine);
-        reactionCoroutine = StartCoroutine(ReactionRoutine(selectedSprite, randomText));
+        reactionCoroutine = StartCoroutine(ReactionRoutine(selectedSprite, ""));
+    }
+
+    public Sprite GetIdleFace()
+    {
+        if (currentAnger <= 0 && currentMelancholy <= 0) return happyFace;
+        
+        if (currentAnger > currentMelancholy) return angryFace;
+        if (currentMelancholy > currentAnger) return melancholyFace;
+        
+        // Equal and > 0
+        return Random.value > 0.5f ? angryFace : melancholyFace;
     }
 
     private IEnumerator ReactionRoutine(Sprite reactionSprite, string reactionText)
@@ -254,7 +237,7 @@ public class CustomerController : MonoBehaviour
             onDialogueChanged?.Invoke(reactionText);
             
         yield return new WaitForSeconds(1.0f);
-        onFaceChanged?.Invoke(normalFace);
+        onFaceChanged?.Invoke(GetIdleFace());
         reactionCoroutine = null;
     }
 }

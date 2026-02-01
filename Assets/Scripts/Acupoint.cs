@@ -79,7 +79,7 @@ public class Acupoint : MonoBehaviour
         if (Mathf.Abs(melancholyImpact) > 0.01f) master.ApplyEmotionImpact(CustomerController.EmotionType.Melancholy, melancholyImpact);
         
         master.RegisterHit();
-        master.ShowReaction(angerImpact, melancholyImpact);
+        master.ShowReaction(accuracy > 0.9f);
 
         if (accuracy > 0.9f)
         {
